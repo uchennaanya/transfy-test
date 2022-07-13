@@ -26,6 +26,7 @@
                     <h2>Acc. balance:</h2><small>200,000.00</small>only
                 </div>
             </div>
+
             <div class="table-wrap">
                 <table>
                     <tr>
