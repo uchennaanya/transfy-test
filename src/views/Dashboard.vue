@@ -4,10 +4,10 @@
             <img src="../assets/cover.png" alt="Logo">
             <nav>
                 <ul>
-                    <li><a href="#">Username</a></li>
+                    <li><a href="#">Home</a></li>
                     <li><a href="#">Statistic</a></li>
                     <li><a href="#">Contact</a></li>
-                    <li><a href="#">Logout</a></li>
+
                 </ul>
             </nav>
         </div>
@@ -78,7 +78,7 @@ export default {
 <style scoped>
 .leftpan {
     height: 100vh;
-    width: 10vw;
+    width: auto;
     border-right: 1px solid ;
     display: inline-block;
     padding-right: 1rem;
@@ -96,7 +96,7 @@ export default {
 
 .leftpan img {
     display: block;
-    height: 6vh;
+    height: 10vh;
 }
 
 main {
@@ -104,7 +104,6 @@ main {
     justify-content: space-between;
     padding: 0 1rem;
 }
-
 .table-wrap {
 display: flex;
 justify-content: center;
@@ -114,14 +113,17 @@ tr:nth-child(odd) {
     background: #ccc;
 }
 
-tr {
-    padding: 2rem !important;
-}
-
-
-table, th, td {
-  border: none;
+table {
   border-collapse: collapse;
+  width: 100%;
+}
+th, td {
+  padding: 0.25rem;
+  text-align: left;
+  border: 1px solid #ccc;
+}
+tbody tr:nth-child(odd) {
+  background: #eee;
 }
 .rightspan {
     display: flex;
@@ -133,8 +135,7 @@ table, th, td {
 
 .dataSection {
     display: flex;
-      flex-direction: column;
-
+    flex-direction: column;
     justify-content: space-between;
 }
 
@@ -142,7 +143,7 @@ table, th, td {
     box-shadow: 2px 1px 9px 0 #ccc;
     padding: 2rem;
     border-radius: 5px;
-    margin: 3rem;
+    margin: 1rem;
 }
 .rightspan button {
     padding: 0.4rem 1rem;
@@ -157,24 +158,33 @@ table, th, td {
 .rightspan .user {
     text-align: right;
     box-shadow: 0 0 5px 0 #ccc;
-    width: 90vw;
+    width: 88.5vw;
     padding: 1rem;
 }
 
 footer {
     background: #ccc;
-    width: 90vw;
+    width: 88.5vw;
     text-align: right;
     padding: 1rem;
+    display: none;
 }
 
 @media only screen and (min-width: 768px) {
     .dataSection {
-flex-direction: row;
+    flex-direction: row;
   }
 
   .balance-wrapper {
-margin: 1rem;
+    margin: 3rem;
+  }
+
+  .leftpan {
+      width: 10vw;
+  }
+
+  footer {
+      display: block;
   }
   }
 </style>>
