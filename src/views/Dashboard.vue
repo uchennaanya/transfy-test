@@ -144,6 +144,12 @@ tbody tr:nth-child(odd) {
     padding: 2rem;
     border-radius: 5px;
     margin: 1rem;
+    transition: all 0.5s ease;
+}
+
+.balance-wrapper:hover {
+    transform: scale(1.1);
+    cursor: pointer;
 }
 .rightspan button {
     padding: 0.4rem 1rem;
@@ -153,6 +159,7 @@ tbody tr:nth-child(odd) {
 
 .rightspan button:hover {
     transform: scale(1.1);
+    cursor: pointer;
 }
 
 .rightspan .user {
