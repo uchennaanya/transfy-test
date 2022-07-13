@@ -1,6 +1,7 @@
 <template>
 <main>
-    <h2>SignIn</h2>
+    <h2>SignIn here</h2>
+    <hr />
     <form @submit.prevent>
         <input type="text" v-model="username" placeholder="Username" required />
         <input type="password" v-model="password" placeholder="Password" required />
@@ -48,28 +49,42 @@ export default {
     input {
         display: block;
         margin: 1rem 0;
-        padding: 0.5rem;
+        padding: 1rem;
         width: 100%;
+        background: rgba(0, 0, 0, 0.5 );
+        border: none;
 
+    }
+
+    input:focus {
+        outline: none;
     }
     button {
         padding: 0.5rem 1rem;
+        transition: all 0.5s ease;
+    }
+
+    button:hover {
+        transform: scale(1.1);
+        border: 1px solid green;
+        background: transparent;
+        color: green;
     }
 
   h2{
     text-align: left;
-    width: 15vw;
+    width: 40vw;
   }
   form {
-      border: 1px solid;
-        width: 90%;
-        padding: 1rem;
-        margin: 0 auto;
+    border: 1px solid;
+    width: 90%;
+    padding: 1rem;
+    margin: 0 auto;
 
   }
   main {
-        width: 100%;
-        background: linear-gradient(to left, rgba(0, 0, 0, 0.5 ), rgba(0, 0, 0, 0.8));
+    width: 100%;
+    background: linear-gradient(to left, #ccc, #f1f1f1);
 
   }
 

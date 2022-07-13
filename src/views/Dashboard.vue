@@ -106,8 +106,10 @@ main {
     padding: 0 1rem;
 }
 .table-wrap {
-display: flex;
+/* display: flex;
 justify-content: center;
+background: #ccc;
+border: 1px solid red !important; */
 }
 
 tr:nth-child(odd) {
