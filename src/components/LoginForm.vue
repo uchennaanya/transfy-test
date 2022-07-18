@@ -5,7 +5,7 @@
     <form @submit.prevent>
         <input type="text" v-model="username" placeholder="Username" required />
         <input type="password" v-model="password" placeholder="Password" required />
-        <div v-if="erroData != null">{{errorData}}</div>
+        <div v-if="errorData != null">{{errorData}}</div>
         <button @click="submitData()">
             Login <span v-if="isLoading">loading ....</span>
         </button>
@@ -28,18 +28,24 @@ export default {
     methods: {
         submitData() {
             this.isLoading = true
-            setTimeout(() => {
-                if (this.username ==  '' || this.password == '') {
-                    this.errorData = "All fields are required"
-                    this.isLoading = false
-                }else {
-                    localStorage.setItem("username", this.username)
-                    this.$router.push('/dashboard')
-                    this.errorData = null
-                    this.isLoading = false
+            if (this.username ==  '' || this.password == '') {
+                this.errorData = "All fields are required"
+                this.isLoading = false
+            }else {
+                let data = {
+                    email: this.username,
+                    password: this.password
                 }
-            }, 1000);
+                this.axios.post(this.$baseUrl+'login', data).then((response) => {
+                    console.log(response.data)
+                })
 
+
+                // localStorage.setItem("username", this.username)
+                // this.$router.push('/dashboard')
+                // this.errorData = null
+                // this.isLoading = false
+            }
         }
     },
 }

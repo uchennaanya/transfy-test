@@ -7,17 +7,25 @@
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Statistic</a></li>
                     <li><a href="#">Contact</a></li>
-
                 </ul>
             </nav>
         </div>
         <div class="rightspan">
             <div class="user">
-            {{username}} <button @click="logout()">Logout</button>
+                <Icon icon="charm:menu-hamburger" width="24" :inline="true" class="toggle" />
+                <span>
+                    <Icon icon="carbon:user-avatar-filled-alt" width="30" :inline="true" />
+                    {{username}} <button @click="logout()">Logout</button>
+                </span>
             </div>
+            <div style="width: 100%; padding: 1rem; 1rem; background: #ccc"></div>
             <div class="dataSection">
-                <div class="balance-wrapper">
-                    <h2>Acc. balance:</h2><small>200,000.00</small>only
+                <div class="balance-wrapper" title="Uchenna' acc. balance">
+                    <h2>200,000.00</h2>
+                    <small>
+                        Acc. Balance
+                        <Icon icon="ant-design:info-circle-outlined" :inline="true" />
+                    </small>
                 </div>
                 <div class="balance-wrapper">
                     <h2>Acc. balance:</h2><small>200,000.00</small>only
@@ -46,32 +54,52 @@
             <footer>Uchenna Anya &copy;</footer>
         </div>
     </main>
-
 </template>
 
 <script>
+import { Icon } from '@iconify/vue';
 
 export default {
     name : 'UserDashboard',
+     components: {
+		Icon,
+	},
     data() {
         return {
-            username : localStorage.getItem('username')
+            username : localStorage.getItem('username'),
         }
     },
     mounted(){
-        if (localStorage.getItem('username') == null || localStorage.getItem('username')==""){
-            alert("Please Login to continue")
-            this.$router.push('/')
+        // if (localStorage.getItem('username') == null || localStorage.getItem('username')==""){
+        //     alert("Please Login to continue")
+        //     this.$router.push('/')
+        // }
+        const config = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
         }
+        const userId ={
+            userId:1
+        }
+        this.axios.post(this.$baseUrl+'get-info', userId, config).then((response) => {
+            console.log(response.data)
+        })
+        this.axios.post(this.$baseUrl+'user-orders', userId, config).then((response) => {
+            console.log(response.data)
+        })
     },
+
+
     methods: {
         logout() {
             localStorage.removeItem('username');
             localStorage.clear()
             this.$router.push('/')
-        }
-    }
-
+        },
+        toggle(){
+        },
+    },
 }
 </script>
 
@@ -81,9 +109,8 @@ export default {
     height: 100vh;
     width: auto;
     border-right: 1px solid ;
-    display: inline-block;
     padding-right: 1rem;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
@@ -101,15 +128,11 @@ export default {
 }
 
 main {
-    display: flex;
     justify-content: space-between;
-    padding: 0 1rem;
 }
 .table-wrap {
-/* display: flex;
-justify-content: center;
-background: #ccc;
-border: 1px solid red !important; */
+width: 90%;
+overflow: auto;
 }
 
 tr:nth-child(odd) {
@@ -118,7 +141,8 @@ tr:nth-child(odd) {
 
 table {
   border-collapse: collapse;
-  width: 100%;
+  width: auto;
+margin: auto;
 }
 th, td {
   padding: 0.25rem;
@@ -128,14 +152,6 @@ th, td {
 tbody tr:nth-child(odd) {
   background: #eee;
 }
-.rightspan {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-bottom: 1rem 1rem 0 0;
-    align-items: center;
-}
-
 .dataSection {
     display: flex;
     flex-direction: column;
@@ -148,8 +164,34 @@ tbody tr:nth-child(odd) {
     border-radius: 5px;
     margin: 1rem;
     transition: all 0.5s ease;
+    /* background-image: linear-gradient(to right, rgba(125, 181, 130, 0.5)) !important; */
+    background-image: linear-gradient(to bottom right, rgb(255, 255, 255) , rgb(176, 176, 219))
+}
+.balance-wrapper small {
+    display: flex;
+    justify-content: space-between;
+}
+.rightspan {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    padding-bottom: 1rem 1rem 0 0;
+    align-items: center;
+}
+.rightspan .user {
+    text-align: right;
+    box-shadow: 0 0 5px 0 #ccc;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
 }
 
+.user span {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 .balance-wrapper:hover {
     transform: scale(1.1);
     cursor: pointer;
@@ -165,22 +207,26 @@ tbody tr:nth-child(odd) {
     cursor: pointer;
 }
 
-.rightspan .user {
-    text-align: right;
-    box-shadow: 0 0 5px 0 #ccc;
-    width: 88.5vw;
-    padding: 1rem;
-}
-
 footer {
     background: #ccc;
     width: 88.5vw;
     text-align: right;
     padding: 1rem;
     display: none;
+    position: absolute;
+    bottom: 0;
+    left: 11.3vw;
 }
 
 @media only screen and (min-width: 768px) {
+    .rightspan .user {
+        justify-content: end;
+        align-items: center;
+        width: 88.5vw;
+    }
+    .toggle {
+        display: none;
+    }
     .dataSection {
     flex-direction: row;
   }
@@ -191,6 +237,12 @@ footer {
 
   .leftpan {
       width: 10vw;
+      display: inline-block;
+      display: flex;
+  }
+  main {
+    padding: 0 1rem;
+    display: flex;
   }
 
   footer {
